@@ -1,0 +1,11 @@
+{
+  "cSpell.words": ["postbuild"],
+
+  "files.eol": "\n",
+  "git.ignoreLimitWarning": true,
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "cSpell.words": ["middlewares"]
+}
