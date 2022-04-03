@@ -3,6 +3,7 @@ const cookieParser = require('cookie-parser');
 const compression = require('compression');
 const express = require('express');
 const cors = require('cors');
+const router = require('./routes');
 
 require('dotenv').config();
 
@@ -18,9 +19,7 @@ app.use(cors());
 
 app.set('port', PORT || 3001);
 
-app.use('/api/v1', (req, res) => {
-  res.json({ name: 'amjad' });
-});
+app.use('/api/v1', router);
 
 if (NODE_ENV === 'prod') {
   app.use(express.static(join(__dirname, '..', 'client', 'build')));
