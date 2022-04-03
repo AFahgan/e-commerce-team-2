@@ -1,4 +1,4 @@
-const addProductQuery = require('../database/queries');
+const { addProductQuery } = require('../database/queries');
 const customizedError = require('../utils/customizedError');
 
 module.exports = (req, res, next) => {
