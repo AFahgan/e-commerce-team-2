@@ -1,14 +1,21 @@
 import './App.css';
 import { Component } from 'react';
-import Button from './Components/Button/Button';
-
+import Header from './Components/Header/Header';
 class App extends Component {
-  state = { products: [] };
+  state = {
+    products: [
+      {}
+    ],
+    proudectName: '',
+  };
+  handelSearch = (value)=>{
+    this.setState({proudectName:value})
 
+  }
   render() {
     return (
-      <div className='App'>
-        <Button text='add product' />
+      <div className="App">
+        <Header handelSearch={this.handelSearch} />
       </div>
     );
   }
