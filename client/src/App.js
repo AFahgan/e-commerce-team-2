@@ -1,7 +1,7 @@
 import './App.css';
 import { Component } from 'react';
 import Button from './Components/Button/Button';
-
+import Landing from './Components/Landing/Landing';
 class App extends Component {
   state = { products: [] };
 
@@ -9,6 +9,7 @@ class App extends Component {
     return (
       <div className='App'>
         <Button text='add product' />
+        < Landing />
       </div>
     );
   }
