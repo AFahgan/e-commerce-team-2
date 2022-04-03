@@ -1,10 +1,9 @@
 const Router = require('express').Router();
 
-const editProduct = require('./controllers/editProduct');
-const addProduct = require('./controllers/addProduct');
+const { editProduct, deleteProduct, addProduct } = require('./controllers');
 
 Router.route('/product').post(addProduct);
 
-Router.route('/product/:id').patch(editProduct);
+Router.route('/product/:id').patch(editProduct).delete(deleteProduct);
 
 module.exports = Router;
