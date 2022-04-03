@@ -1,15 +1,18 @@
 import './App.css';
 import { Component } from 'react';
-import Button from './Components/Button/Button';
+import Products from './Components/Products/Products';
+import Container from './Components/Container/Container';
 
 class App extends Component {
   state = { products: [] };
 
   render() {
     return (
-      <div className='App'>
-        <Button text='add product' />
-      </div>
+      <Container>
+        <div className='App'>
+          <Products />
+        </div>
+      </Container>
     );
   }
 }
