@@ -4,7 +4,6 @@ const compression = require('compression');
 const express = require('express');
 const cors = require('cors');
 const router = require('./routes');
-
 require('dotenv').config();
 
 const { PORT, NODE_ENV } = process.env;
@@ -14,7 +13,8 @@ const app = express();
 app.use(cookieParser());
 app.use(compression());
 app.disable('x-powered-by');
-app.use(express.urlencoded({ extends: true }));
+// app.use(express.urlencoded({ extends: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 app.set('port', PORT || 3001);

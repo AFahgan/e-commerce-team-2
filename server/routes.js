@@ -1,7 +1,8 @@
 const Router = require('express').Router();
 
-const editProduct = require('./controllers/editProduct');
+const { editProduct, deleteProduct } = require('./controllers');
 
 Router.route('/product/:id').patch(editProduct);
+Router.delete('/product/:id', deleteProduct);
 
 module.exports = Router;
