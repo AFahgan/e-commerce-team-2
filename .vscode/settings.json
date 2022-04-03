@@ -7,5 +7,18 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "cSpell.words": ["middlewares"]
+  "cSpell.words": [
+    "middlewares"
+  ],
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "askForPassword": true,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "ecommerce",
+      "connectString": "postgres://amjad:12345678@localhost:5432/products"
+    }
+  ]
 }
