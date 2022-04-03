@@ -1,4 +1,5 @@
 const deleteProductQuery = require('./deleteProductQuery');
-const editProduct = require('./editProduct');
+const editProduct = require('./editProductQuery');
+const addProductQuery = require('./addProductQuery');
 
-module.exports = { deleteProductQuery, editProduct };
+module.exports = { deleteProductQuery, editProduct, addProductQuery };
