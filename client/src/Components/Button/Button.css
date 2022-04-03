@@ -7,3 +7,6 @@
   border-radius: 10px;
   cursor: pointer;
 }
+.btn:hover{
+  cursor: pointer;
+}
