@@ -9,7 +9,7 @@ function Header({handelSearch}){
         <div className="price-div">
             <span>price</span>
             <input type="range"  min="0" max="100" />
-            <span>10 <i class="fa-solid fa-dollar-sign"></i></span>
+            <span>10 <i className="fa-solid fa-dollar-sign"></i></span>
         </div>
         <select name="category" className="category-select">
             <option value="All">All</option>
@@ -19,7 +19,7 @@ function Header({handelSearch}){
             <option value="Kitchen">Kitchen</option>
             <option value="Bed">Bed</option>
         </select>
-        <i class="fa-solid fa-cart-shopping"></i>
+        <i className="fa-solid fa-cart-shopping"></i>
         </div>
     </header>
 }
