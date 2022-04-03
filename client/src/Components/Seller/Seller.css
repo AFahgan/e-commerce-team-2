@@ -1,0 +1,14 @@
+.action {
+  text-align: center;
+  margin-top: 4rem;
+}
+.action .btn {
+  padding: 1rem 5rem;
+  transition: 0.3s;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.action .btn:hover {
+  transform: scale(1.1);
+}

@@ -3,6 +3,7 @@ import { Component } from 'react';
 import Products from './Components/Products/Products';
 import Header from './Components/Header/Header';
 import Landing from './Components/Landing/Landing';
+
 class App extends Component {
   state = {
     products: [],
@@ -24,8 +25,6 @@ class App extends Component {
 
 export default App;
 
-// todo seller page component
-// todo cart component
 // todo product details component
 
 // todo login pop component
