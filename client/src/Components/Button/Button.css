@@ -1,9 +1,9 @@
 .btn {
   all: unset;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   background-color: #38CABC;
   color: white;
-  font-weight: 700;
+  font-weight: 500;
   border-radius: 10px;
   cursor: pointer;
 }

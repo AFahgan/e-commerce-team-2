@@ -1,6 +1,7 @@
 import './App.css';
 import { Component } from 'react';
 import Header from './Components/Header/Header';
+import Landing from './Components/Landing/Landing';
 class App extends Component {
   state = {
     products: [
@@ -16,6 +17,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header handelSearch={this.handelSearch} />
+        < Landing />
       </div>
     );
   }
