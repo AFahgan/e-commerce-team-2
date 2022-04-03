@@ -1,12 +1,22 @@
 import './App.css';
 import { Component } from 'react';
+import Header from './Components/Header/Header';
 import Landing from './Components/Landing/Landing';
 class App extends Component {
-  state = { products: [] };
+  state = {
+    products: [
+      {}
+    ],
+    proudectName: '',
+  };
+  handelSearch = (value)=>{
+    this.setState({proudectName:value})
 
+  }
   render() {
     return (
-      <div className='App'>
+      <div className="App">
+        <Header handelSearch={this.handelSearch} />
         < Landing />
       </div>
     );
