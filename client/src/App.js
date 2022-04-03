@@ -5,7 +5,7 @@ import Header from './Components/Header/Header';
 import Landing from './Components/Landing/Landing';
 class App extends Component {
   state = {
-    products: [{}],
+    products: [],
     proudectName: '',
   };
   handelSearch = (value) => {
@@ -16,7 +16,7 @@ class App extends Component {
       <div className='App'>
         <Header handelSearch={this.handelSearch} />
         <Landing />
-        <Products />
+        <Products products={this.state.products} />
       </div>
     );
   }
