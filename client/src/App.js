@@ -1,6 +1,7 @@
 import './App.css';
 import { Component } from 'react';
 import Button from './Components/Button/Button';
+import ProductDetails from './Components/ProductDetails/ProductDetails';
 
 class App extends Component {
   state = { products: [] };
@@ -9,6 +10,7 @@ class App extends Component {
     return (
       <div className='App'>
         <Button text='add product' />
+        <ProductDetails />
       </div>
     );
   }
