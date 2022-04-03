@@ -1,0 +1,23 @@
+.welcome-container{
+  padding: 3% 5%;
+  display: flex;
+  background-color: #F4F2F3;
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 50px;
+  align-items: center;
+  margin-top: 50px;
+}
+.main-text{
+width: 45%;
+color: #292929;
+margin-bottom: 3%;
+}
+.website-description{
+  width: 90%;
+  color: #474747;
+  margin-bottom: 3%;
+}
+.between-tow-component{
+  width: 30px;
+}

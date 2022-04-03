@@ -17,7 +17,7 @@
 
 .card img {
   mix-blend-mode: darken;
-  width:100%;
+  width: 100%;
 }
 
 .card i {
@@ -51,16 +51,25 @@
 
 .card .info .details .price {
   color: #38cabc;
+  font-size: 20px;
   font-weight: bold;
 }
 
 .card .info .details .name {
   color: #242424;
   font-weight: bold;
+  font-size: 20px;
+}
+
+.card .info .name {
+  color: #242424;
+  font-weight: bold;
+  font-size: 20px;
 }
 
 .card .info .btn {
-  padding: 5px 15px;
+  padding: 6px 15px;
   text-align: center;
+  font-size: 20px;
   cursor: pointer;
 }

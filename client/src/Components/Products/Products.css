@@ -3,9 +3,11 @@ ul {
 }
 
 .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  gap: 3rem;
-  margin-top: 5rem;
+  padding: 3% 5%;
+  display: flex;
+  margin: 0 auto;
+  border-radius: 50px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 50px;
 }
-
