@@ -1,0 +1,13 @@
+ul {
+  list-style: none;
+}
+
+.grid {
+  padding: 3% 5%;
+  display: flex;
+  margin: 0 auto;
+  border-radius: 50px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 50px;
+}
