@@ -1,10 +1,10 @@
-const editProduct = require('../database/queries/editProduct');
+const editProductQuery = require('../database/queries/editProductQuery');
 
 module.exports = (req, res, next) => {
   const { id } = req.params;
   const { name, description, price } = req.body;
 
-  editProduct({
+  editProductQuery({
     id,
     name,
     description,
