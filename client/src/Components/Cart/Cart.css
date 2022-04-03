@@ -1,0 +1,21 @@
+.action {
+  text-align: center;
+  margin-top: 5rem;
+}
+
+.action .total-price {
+  all: unset;
+  padding: 15px 2rem;
+  background-color: #38cabc;
+  color: white;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.action .total-price span {
+  color: black;
+  font-weight: 700;
+  margin-left: 1rem;
+}
