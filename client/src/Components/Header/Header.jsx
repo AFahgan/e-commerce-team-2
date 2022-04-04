@@ -9,7 +9,7 @@ function Header({handelSearch , changeCategory , changePrice , price}){
         <div className='contianer'>
         <div className="price-div">
             <span>price</span>
-            <input type="range"  min="100" max="2500"  onChange={(e)=>changePrice(e)}/>
+            <input type="range"  min="100" max="2500"  step='5' onChange={(e)=>changePrice(e)}/>
             <span>{price}<i className="fa-solid fa-dollar-sign"></i></span>
         </div>
         <Select  changeCategory={changeCategory}  />
