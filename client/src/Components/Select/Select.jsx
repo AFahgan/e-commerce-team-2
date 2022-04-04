@@ -1,8 +1,12 @@
-import './Select'
-const Select = ({ isAdd , changeCategory }) => {
+import './Select';
+const Select = ({ isAdd, handelChange }) => {
   return (
-    <select name="category" className="category-select" onChange={(e)=>changeCategory(e)}>
-      { !isAdd && <option value="All">All</option> }
+    <select
+      name="category"
+      className="category-select"
+      onChange={(e) => handelChange(e.target.name, e.target.value)}
+    >
+      {!isAdd && <option value="All">All</option>}
       <option value="Chair">Chair</option>
       <option value="Sofa">Sofa</option>
       <option value="Living Room">Living Room</option>

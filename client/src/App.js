@@ -23,11 +23,9 @@ class App extends Component {
       });
     }
   };
-  changePrice = (e) => {
-    this.setState({ price: e.target.value });
-  };
-  changeCategory = (e) => {
-    this.setState({ category: e.target.value });
+  handelChange = ( name , value ) => {
+    this.setState({ [name]: value });
+    console.log(this.state)
   };
   render() {
     const { products, FilterProducts, category, price } = this.state;
@@ -35,8 +33,7 @@ class App extends Component {
       <div className="App">
         <Header
           handelSearch={this.handelSearch}
-          changePrice={this.changePrice}
-          changeCategory={this.changeCategory}
+          handelChange={this.handelChange}
           price={price}
         />
         <Landing />
