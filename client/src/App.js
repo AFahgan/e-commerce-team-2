@@ -65,8 +65,3 @@ class App extends Component {
 }
 
 export default App;
-
-// todo product details component
-
-// todo login pop component
-// todo add product pop component
