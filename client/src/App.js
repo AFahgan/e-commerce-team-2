@@ -37,6 +37,7 @@ class App extends Component {
           handelSearch={this.handelSearch}
           changePrice={this.changePrice}
           changeCategory={this.changeCategory}
+          price={price}
         />
         <Landing />
         <Products

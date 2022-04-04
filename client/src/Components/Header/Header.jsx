@@ -1,6 +1,6 @@
 import Select from '../Select/Select';
 import './Header.css'
-function Header({handelSearch , changeCategory , changePrice}){
+function Header({handelSearch , changeCategory , changePrice , price}){
     return <header>
         <h1 className="logo">IKEA</h1>
         <div className="search-div">
@@ -9,8 +9,8 @@ function Header({handelSearch , changeCategory , changePrice}){
         <div className='contianer'>
         <div className="price-div">
             <span>price</span>
-            <input type="range"  min="0" max="100"  onChange={(e)=>changePrice(e)}/>
-            <span>10 <i className="fa-solid fa-dollar-sign"></i></span>
+            <input type="range"  min="100" max="2500"  onChange={(e)=>changePrice(e)}/>
+            <span>{price}<i className="fa-solid fa-dollar-sign"></i></span>
         </div>
         <Select  changeCategory={changeCategory}  />
         <i className="fa-solid fa-cart-shopping"></i>
