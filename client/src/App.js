@@ -17,6 +17,7 @@ class App extends Component {
     FilterProducts: [],
     isLogIn: false,
     isAddProduct: false,
+    
   };
 
   componentDidMount() {
@@ -92,6 +93,7 @@ class App extends Component {
                 products={products}
                 isAddProduct={isAddProduct}
                 handleAddProductPop={this.handleAddProductPop}
+                handelChange={this.handelChange}
               />
             }
           />
