@@ -3,6 +3,7 @@
   display: flex;
   gap: 10px;
   flex-direction: column;
+  flex-basis: 25%;
 }
 
 .card .card-main {
@@ -13,6 +14,7 @@
   align-items: center;
   padding-block: 17px 70px;
   padding-inline: 13px;
+  height: 21rem;
 }
 
 .card img {
