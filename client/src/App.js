@@ -17,6 +17,7 @@ class App extends Component {
     FilterProducts: [],
     isLogIn: false,
     isAddProduct: false,
+    productDetails: {id:'', name:'', description:'', image:'', price:'',},
   };
 
   componentDidMount() {
@@ -48,8 +49,14 @@ class App extends Component {
   handelChange = (name, value) => {
     this.setState({ [name]: value });
   };
+
+  handleProductDetails = ({ id, name, description, image, price,}) => {
+    this.setState({
+      productDetails:{ id, name, description, image, price,}
+    })
+  }
   render() {
-    const { products, FilterProducts, category, price, isLogIn, isAddProduct } = this.state;
+    const { products, FilterProducts, category, price, isLogIn, isAddProduct, productDetails } = this.state;
     return (
       <div className='App'>
         <Header
@@ -95,7 +102,7 @@ class App extends Component {
               />
             }
           />
-          <Route path='/product/:id' element={<ProductDetails />} />
+          <Route path='/product/:id' element={<ProductDetails handleProductDetails={this.handleProductDetails} productDetails= {productDetails} />} />
           <Route path='*' element={<h1>not found</h1>} />
         </Routes>
       </div>
