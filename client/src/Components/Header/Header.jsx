@@ -23,8 +23,8 @@ function Header({ handelSearch, handelChange, price }) {
               <span>price</span>
               <input
                 type='range'
-                min='100'
-                max='2500'
+                min='10'
+                max='300'
                 step='5'
                 name='price'
                 onChange={(e) => handelChange(e.target.name, e.target.value)}

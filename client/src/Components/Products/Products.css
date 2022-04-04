@@ -10,4 +10,6 @@ ul {
   align-items: center;
   justify-content: space-between;
   margin-top: 50px;
+  flex-wrap: wrap;
+  gap: 6rem;
 }

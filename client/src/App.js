@@ -7,6 +7,7 @@ import { Routes, Route } from 'react-router-dom';
 import Cart from './Components/Cart/Cart.jsx';
 import Seller from './Components/Seller/Seller.jsx';
 import ProductDetails from './Components/ProductDetails/ProductDetails.jsx';
+import axios from 'axios';
 class App extends Component {
   state = {
     products: [],
@@ -17,6 +18,12 @@ class App extends Component {
     isLogIn: false,
     isAddProduct: false,
   };
+
+  componentDidMount() {
+    axios.get('http://localhost:3001/api/v1/product').then(({ data }) => {
+      this.setState({ products: data });
+    });
+  }
 
   handleLogIn = () => {
     this.setState((previousState) => ({
@@ -59,16 +66,17 @@ class App extends Component {
                 <Landing checkState={isLogIn} handleOnClick={this.handleLogIn} />
                 <Products
                   products={
+                    // products
                     FilterProducts.length
                       ? FilterProducts.filter((ele) =>
                           category === 'All'
-                            ? ele.price === +price
-                            : ele.price === +price && ele.category === category,
+                            ? ele.price >= +price
+                            : ele.price >= +price && ele.category === category,
                         )
                       : products.filter((ele) =>
                           category === 'All'
-                            ? ele.price === +price
-                            : ele.price === +price && ele.category === category,
+                            ? ele.price >= +price
+                            : ele.price >= +price && ele.category === category,
                         )
                   }
                 />
@@ -105,6 +113,5 @@ export default App;
 
 // todo add product to database with confrim msg => rand
 // todo delete product with confirm pop => rand
-
 
 // todo seller edit product with editform => amjad
