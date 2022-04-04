@@ -11,6 +11,13 @@ class App extends Component {
     price:100,
     proudectName: '',
     FilterProducts: [],
+    isLogIn: false,
+  };
+
+  handleLogIn = () => {
+    this.setState((previousState) => ({
+      isLogIn: !previousState.isLogIn
+    }));
   };
   handelSearch = (e) => {
     const { products } = this.state;
@@ -30,7 +37,7 @@ class App extends Component {
     this.setState({ category: e.target.value });
   };
   render() {
-    const { products, FilterProducts, category, price } = this.state;
+    const { products, FilterProducts, category, price, isLogIn } = this.state;
     return (
       <div className="App">
         <Header
@@ -38,7 +45,7 @@ class App extends Component {
           changePrice={this.changePrice}
           changeCategory={this.changeCategory}
         />
-        <Landing />
+        <Landing checkState={isLogIn} handleOnClick={this.handleLogIn}/>
         <Products
           products={
             FilterProducts.length
