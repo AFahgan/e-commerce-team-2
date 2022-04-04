@@ -99,6 +99,7 @@ class App extends Component {
                 products={products}
                 isAddProduct={isAddProduct}
                 handleAddProductPop={this.handleAddProductPop}
+                handelChange={this.handelChange}
               />
             }
           />
