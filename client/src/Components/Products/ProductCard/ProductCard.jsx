@@ -1,8 +1,10 @@
 import './ProductCard.css';
 import Button from '../../Button/Button';
+import { useNavigate } from 'react-router-dom';
 
 const ProductCard = ({ isSeller, isCart, product }) => {
   const { name, price, image, id } = product;
+  const navigate = useNavigate();
 
   return (
     <li className='card' id={id}>
@@ -19,7 +21,7 @@ const ProductCard = ({ isSeller, isCart, product }) => {
             <span className='name'>{name}</span>
           </div>
 
-          <Button text='More' />
+          <Button text='More' handleOnClick={() => navigate(`/product/${id}`)} />
         </div>
       ) : (
         <div className='info'>
