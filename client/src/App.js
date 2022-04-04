@@ -24,7 +24,8 @@ class App extends Component {
     }
   };
   handelChange = ( name , value ) => {
-    this.setState({ name: value });
+    this.setState({ [name]: value });
+    console.log(this.state)
   };
   render() {
     const { products, FilterProducts, category, price } = this.state;
