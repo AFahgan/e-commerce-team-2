@@ -7,17 +7,53 @@ import Landing from './Components/Landing/Landing';
 class App extends Component {
   state = {
     products: [],
+    category:'All',
+    price:100,
     proudectName: '',
+    FilterProducts: [],
   };
-  handelSearch = (value) => {
-    this.setState({ proudectName: value });
+  handelSearch = (e) => {
+    const { products } = this.state;
+    if (e.keyCode === 13) {
+      e.target.click();
+      this.setState({
+        FilterProducts: products.filter(
+          (ele) => ele.name.includes(e.target.value)
+        ),
+      });
+    }
+  };
+  changePrice = (e) => {
+    this.setState({ price: e.target.value });
+  };
+  changeCategory = (e) => {
+    this.setState({ category: e.target.value });
   };
   render() {
+    const { products, FilterProducts, category, price } = this.state;
     return (
-      <div className='App'>
-        <Header handelSearch={this.handelSearch} />
+      <div className="App">
+        <Header
+          handelSearch={this.handelSearch}
+          changePrice={this.changePrice}
+          changeCategory={this.changeCategory}
+        />
         <Landing />
-        <Products products={this.state.products} />
+        <Products
+          products={
+            FilterProducts.length
+              ? FilterProducts.filter((ele) =>
+                  category === 'All'
+                    ? ele.price === +price
+                    : ele.price === +price && ele.category === category
+                )
+              : products.filter((ele) =>
+                  category === 'All'
+                    ? ele.price === +price
+                    : ele.price === +price && ele.category === category
+                )
+          }
+        />
       </div>
     );
   }

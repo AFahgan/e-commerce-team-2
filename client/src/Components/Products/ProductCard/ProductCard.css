@@ -3,7 +3,6 @@
   display: flex;
   gap: 10px;
   flex-direction: column;
-  flex-basis: 25%;
 }
 
 .card .card-main {
