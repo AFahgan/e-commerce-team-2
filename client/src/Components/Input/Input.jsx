@@ -6,5 +6,5 @@ function Input ({ inputType, placeholderText,inputName, handelChange }) {
     onChange={(e) => handelChange(e.target.name, e.target.value)} required/>
   );
 };
-// target.value
+
 export default Input;

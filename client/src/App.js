@@ -47,7 +47,6 @@ class App extends Component {
     }
   };
   handelChange = (name, value) => {
-    console.log(name);
     this.setState({ [name]: value });
   };
   render() {
