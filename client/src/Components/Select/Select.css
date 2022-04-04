@@ -1,0 +1,15 @@
+:root{
+  --main-color:#38CABC;
+}
+.category-select{
+  all: unset;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background:none;
+  padding: 10px;
+  border: 1px solid var(--main-color);
+  cursor: pointer;
+  border-radius: 5px;
+
+}

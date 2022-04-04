@@ -2,6 +2,8 @@ import './Landing.css';
 import Button from '../Button/Button'
 import { Component } from 'react';
 import LogInForm from '../LogInForm/LogInForm';
+import AddProductForm from '../AddProductForm/AddProductForm';
+
 class Landing extends Component {
   state = {
     isLogIn: false,
@@ -23,7 +25,7 @@ class Landing extends Component {
           <span className='between-tow-component'>&emsp;</span>
           < Button text='Log In Seller' handleOnClick={this.handleLogIn}/>
           {isLogIn? (
-          < LogInForm handleOnClick={this.handleLogIn}/>
+          < AddProductForm handleOnClick={this.handleLogIn}/>
           ): (
             null
             )}
