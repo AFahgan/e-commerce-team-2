@@ -13,7 +13,7 @@ const app = express();
 app.use(cookieParser());
 app.use(compression());
 app.disable('x-powered-by');
-// app.use(express.urlencoded({ extends: true }));
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
