@@ -11,5 +11,5 @@
   border: 1px solid var(--main-color);
   cursor: pointer;
   border-radius: 5px;
-
+  padding: 5px;
 }

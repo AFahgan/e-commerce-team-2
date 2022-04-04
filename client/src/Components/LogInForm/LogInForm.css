@@ -9,8 +9,13 @@
   overflow: auto; 
   background-color: rgba(2, 2, 2, 0.4);
 }
+input{
+  all: unset;
+  font-family: 'Fredoka', sans-serif;
+}
 i:hover{
   cursor: pointer;
+  
 }
 .container{
   display: flex;
