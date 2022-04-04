@@ -12,7 +12,7 @@ const AddProductForm = ({ handleOnClick }) => {
         < Input inputType='text' placeholderText='Enter Product Description' />
         < Input inputType='url' placeholderText='Enter Product image URL' />
         < Input inputType='number' placeholderText='Enter Product Price' />
-        <Select add ={ true }/>
+        <Select isAdd ={ true }/>
         <Button text='Submit' />
       </div>
     </div>

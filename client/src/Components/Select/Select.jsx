@@ -1,8 +1,8 @@
 import './Select'
-const Select = ({ add }) => {
+const Select = ({ isAdd }) => {
   return (
     <select name="category" className="category-select">
-      { !add && <option value="All">All</option> }
+      { !isAdd && <option value="All">All</option> }
       <option value="Chair">Chair</option>
       <option value="Sofa">Sofa</option>
       <option value="Living Room">Living Room</option>
