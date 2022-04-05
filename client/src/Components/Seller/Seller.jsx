@@ -3,6 +3,7 @@ import Header from '../Header/Header';
 import Products from '../Products/Products';
 import './Seller.css';
 import AddProductForm from '../AddProductForm/AddProductForm.jsx';
+import EditProductForm from '../EditProductForm/EditProductForm';
 
 const Seller = ({
   products,
@@ -12,7 +13,13 @@ const Seller = ({
   handleEditProductPop,
   handleEditSubmit,
   inputsValues,
-  handleInputChange
+  handleInputChange,
+  checkState,
+  handleOnClick,
+  deletedProductId,
+  deletedProductValue,
+  handelChange,
+  updateState,
 }) => {
   return (
     <>
@@ -20,7 +27,23 @@ const Seller = ({
       <div className='action'>
         <Button text='+ Add Product' handleOnClick={handleAddProductPop} />
 
-        {isAddProduct && <AddProductForm handleAddProductPop={handleAddProductPop} />}
+        {isAddProduct && (
+          <AddProductForm
+            updateState={updateState}
+            handleAddProductPop={handleAddProductPop}
+            handelChange={handelChange}
+          />
+        )}
+
+        {isEditProduct && (
+          <EditProductForm
+            handleSubmit={handleEditSubmit}
+            handleAddProductPop={handleAddProductPop}
+            inputsValues={inputsValues}
+            handleInputEditChange={handleInputChange}
+            handleEditProductPop={handleEditProductPop}
+          />
+        )}
       </div>
       <Products
         isSeller
@@ -28,8 +51,12 @@ const Seller = ({
         isEditProduct={isEditProduct}
         handleEditProductPop={handleEditProductPop}
         handleEditSubmit={handleEditSubmit}
-        inputsValues={inputsValues}
         handleInputChange={handleInputChange}
+        checkState={checkState}
+        handleOnClick={handleOnClick}
+        deletedProductId={deletedProductId}
+        deletedProductValue={deletedProductValue}
+        updateState={updateState}
       />
     </>
   );

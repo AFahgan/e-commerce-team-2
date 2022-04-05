@@ -4,7 +4,7 @@ const Select = ({ isAdd, handelChange }) => {
     <select
       name="category"
       className="category-select"
-      onChange={(e) => handelChange(e.target.name, e.target.value)}
+      onChange={handelChange}
     >
       {!isAdd && <option value="All">All</option>}
       <option value="Chair">Chair</option>

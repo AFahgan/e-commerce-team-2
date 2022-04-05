@@ -8,6 +8,8 @@ import Cart from './Components/Cart/Cart.jsx';
 import Seller from './Components/Seller/Seller.jsx';
 import ProductDetails from './Components/ProductDetails/ProductDetails.jsx';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+
 class App extends Component {
   state = {
     products: [],
@@ -20,6 +22,10 @@ class App extends Component {
     isEditProduct: false,
     inputsValues: { name: '', description: '', price: 0.0, image: '' },
     editedProductId: null,
+    isConfirmsDelete: false,
+    deletedProductId: '',
+    productDetails: { id: '', name: '', description: '', image: '', price: '' },
+    productsCart: [],
   };
 
   componentDidMount() {
@@ -28,9 +34,27 @@ class App extends Component {
     });
   }
 
+  updateState = () => {
+    axios.get('http://localhost:3001/api/v1/product').then(({ data }) => {
+      this.setState({ products: data });
+    });
+  };
+
+  setStateProductId = (id) => {
+    this.setState(() => ({
+      deletedProductId: id,
+    }));
+  };
+
   handleLogIn = () => {
     this.setState((previousState) => ({
       isLogIn: !previousState.isLogIn,
+    }));
+  };
+
+  handConfirmDeleting = () => {
+    this.setState((previousState) => ({
+      isConfirmsDelete: !previousState.isConfirmsDelete,
     }));
   };
 
@@ -52,31 +76,23 @@ class App extends Component {
   };
 
   handleInputChange = ({ target }) => {
-    this.setState(({ inputsValues }) => ({
-      inputsValues: { ...inputsValues, [target.name]: target.value },
-    }));
+    this.setState({
+      inputsValues: { ...this.state.inputsValues, [target.name]: target.value },
+    });
   };
 
   handleEditSubmit = (e) => {
     e.preventDefault();
-
     const id = this.state.editedProductId;
     const inputsValues = this.state.inputsValues;
 
     axios
       .patch(`http://localhost:3001/api/v1/product/${id}`, inputsValues)
-      .then(() => {
-        this.setState((previousState) => ({ isEditProduct: !previousState.isEditProduct }));
-      })
       .then(() =>
-        axios.get('http://localhost:3001/api/v1/product').then(({ data }) => {
-          this.setState({ products: data });
-        }),
-      );
-  };
-
-  handelChange = (name, value) => {
-    this.setState({ [name]: value });
+        this.setState((previousState) => ({ isEditProduct: !previousState.isEditProduct })),
+      )
+      .then(this.updateState)
+      .then(() => toast.success('Your Product has been edited Successfully!'));
   };
 
   handelSearch = (e) => {
@@ -88,6 +104,47 @@ class App extends Component {
       });
     }
   };
+
+  handelChange = (name, value) => {
+    this.setState({ [name]: value });
+  };
+
+  handleProductDetails = ({ id, name, description, image, price }) => {
+    this.setState({
+      productDetails: { id, name, description, image, price },
+    });
+  };
+  handleChangeId = (Id) => {
+    const { products } = this.state;
+    window.localStorage.setItem(
+      'products',
+      JSON.stringify(
+        window.localStorage.products
+          ? [
+              ...JSON.parse(window.localStorage.products),
+              ...products.filter((e) => e.id === +Id),
+            ]
+          : [...products.filter((e) => e.id === +Id)],
+      ),
+    );
+    toast.success('Your Product has been added in Cart Successfully!');
+  };
+  handelDeleteFromCart = (id) => {
+    let products = JSON.parse(window.localStorage.products);
+    this.setState({ productsCart: JSON.parse(window.localStorage.products) });
+    for (let i = 0; i <= products.length; i++) {
+      if (products[i].id === id) {
+        products[i] = [];
+        break;
+      }
+    }
+    window.localStorage.clear();
+    window.localStorage.setItem(
+      'products',
+      JSON.stringify(products.filter((e) => e.length !== 0)),
+    );
+  };
+
   render() {
     const {
       products,
@@ -96,10 +153,12 @@ class App extends Component {
       price,
       isLogIn,
       isAddProduct,
+      isConfirmsDelete,
+      deletedProductId,
+      productDetails,
       isEditProduct,
       inputsValues,
     } = this.state;
-
     return (
       <div className='App'>
         <Header
@@ -113,8 +172,10 @@ class App extends Component {
             path='/'
             element={
               <>
+                <ToastContainer />
                 <Landing checkState={isLogIn} handleOnClick={this.handleLogIn} />
                 <Products
+                  handleChangeId={this.handleChangeId}
                   products={
                     FilterProducts.length
                       ? FilterProducts.filter((ele) =>
@@ -133,11 +194,18 @@ class App extends Component {
             }
           />
 
-          <Route path='/cart' element={<Cart />} />
+          <Route
+            path='/cart'
+            element={<Cart handelDeleteFromCart={this.handelDeleteFromCart} />}
+          />
           <Route
             path='/seller'
             element={
               <Seller
+                deletedProductValue={deletedProductId}
+                deletedProductId={this.setStateProductId}
+                checkState={isConfirmsDelete}
+                handleOnClick={this.handConfirmDeleting}
                 products={products}
                 isAddProduct={isAddProduct}
                 isEditProduct={isEditProduct}
@@ -146,10 +214,24 @@ class App extends Component {
                 handleEditSubmit={this.handleEditSubmit}
                 inputsValues={inputsValues}
                 handleInputChange={this.handleInputChange}
+                handelChange={this.handelChange}
+                updateState={this.updateState}
               />
             }
           />
-          <Route path='/product/:id' element={<ProductDetails />} />
+          <Route
+            path='/product/:id'
+            element={
+              <>
+                <ToastContainer />
+                <ProductDetails
+                  handleChangeId={this.handleChangeId}
+                  handleProductDetails={this.handleProductDetails}
+                  productDetails={productDetails}
+                />
+              </>
+            }
+          />
           <Route path='*' element={<h1>not found</h1>} />
         </Routes>
       </div>
@@ -158,14 +240,3 @@ class App extends Component {
 }
 
 export default App;
-
-// todo add component did mount to get products => abdullha
-// todo get productsDetails based on id => abdullah
-
-// todo add to cart in localstorage => mayar
-// todo remove from cart localstorage => mayar
-
-// todo add product to database with confrim msg => rand
-// todo delete product with confirm pop => rand
-
-// todo seller edit product with editform => amjad

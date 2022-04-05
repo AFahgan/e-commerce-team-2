@@ -1,6 +1,6 @@
 import './Input.css';
 
-function Input({ inputType, placeholderText, value, handleInputChange,name }) {
+function Input({ inputType, placeholderText, value, handleInputChange, name }) {
   return (
     <input
       type={inputType}
@@ -9,8 +9,8 @@ function Input({ inputType, placeholderText, value, handleInputChange,name }) {
       value={value}
       onChange={handleInputChange}
       name={name}
+      required
     />
   );
-};
-
+}
 export default Input;
