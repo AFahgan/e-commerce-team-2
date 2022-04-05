@@ -19,14 +19,22 @@ class App extends Component {
     FilterProducts: [],
     isLogIn: false,
     isAddProduct: false,
+    isEditProduct: false,
+    inputsValues: { name: '', description: '', price: 0.0, image: '' },
+    editedProductId: null,
     isConfirmsDelete: false,
-    deletedProductId:'',
+    deletedProductId: '',
     productDetails: { id: '', name: '', description: '', image: '', price: '' },
-    productsCart : [],
-    
+    productsCart: [],
   };
 
   componentDidMount() {
+    axios.get('http://localhost:3001/api/v1/product').then(({ data }) => {
+      this.setState({ products: data });
+    });
+  }
+
+  updateState = () => {
     axios.get('http://localhost:3001/api/v1/product').then(({ data }) => {
       this.setState({ products: data });
     });
@@ -37,7 +45,6 @@ class App extends Component {
       deletedProductId: id,
     }));
   };
-
 
   handleLogIn = () => {
     this.setState((previousState) => ({
@@ -57,6 +64,37 @@ class App extends Component {
     }));
   };
 
+  handleEditProductPop = ({ target: { id } }) => {
+    const { name, description, image, category, price } =
+      this.state.products.find(({ id: pId }) => pId === +id) || [];
+
+    this.setState((previousState) => ({
+      isEditProduct: !previousState.isEditProduct,
+      inputsValues: { name, description, image, category, price },
+      editedProductId: id,
+    }));
+  };
+
+  handleInputChange = ({ target }) => {
+    this.setState({
+      inputsValues: { ...this.state.inputsValues, [target.name]: target.value },
+    });
+  };
+
+  handleEditSubmit = (e) => {
+    e.preventDefault();
+    const id = this.state.editedProductId;
+    const inputsValues = this.state.inputsValues;
+
+    axios
+      .patch(`http://localhost:3001/api/v1/product/${id}`, inputsValues)
+      .then(() =>
+        this.setState((previousState) => ({ isEditProduct: !previousState.isEditProduct })),
+      )
+      .then(this.updateState)
+      .then(() => toast.success('Your Product has been edited Successfully!'));
+  };
+
   handelSearch = (e) => {
     const { products } = this.state;
     if (e.keyCode === 13) {
@@ -66,7 +104,7 @@ class App extends Component {
       });
     }
   };
-  
+
   handelChange = (name, value) => {
     this.setState({ [name]: value });
   };
@@ -82,34 +120,56 @@ class App extends Component {
       'products',
       JSON.stringify(
         window.localStorage.products
-          ? [...JSON.parse(window.localStorage.products), ...products.filter((e) => e.id === +Id)]
-          : [...products.filter((e) => e.id === +Id)]
-      )
+          ? [
+              ...JSON.parse(window.localStorage.products),
+              ...products.filter((e) => e.id === +Id),
+            ]
+          : [...products.filter((e) => e.id === +Id)],
+      ),
     );
     toast.success('Your Product has been added in Cart Successfully!');
   };
   handelDeleteFromCart = (id) => {
-    let products =JSON.parse(window.localStorage.products)
-    this.setState({productsCart : JSON.parse(window.localStorage.products) })
-    for( let i = 0 ; i <= products.length ; i++){
-      if(products[i].id === id){
-        products[i] = []
-          break;
+    let products = JSON.parse(window.localStorage.products);
+    this.setState({ productsCart: JSON.parse(window.localStorage.products) });
+    for (let i = 0; i <= products.length; i++) {
+      if (products[i].id === id) {
+        products[i] = [];
+        break;
       }
     }
     window.localStorage.clear();
-    window.localStorage.setItem('products',JSON.stringify(products.filter(e => e.length !== 0)));
+    window.localStorage.setItem(
+      'products',
+      JSON.stringify(products.filter((e) => e.length !== 0)),
+    );
   };
 
   render() {
-    const { products, FilterProducts, category, price, isLogIn, isAddProduct,isConfirmsDelete, deletedProductId, productDetails } = this.state;
+    const {
+      products,
+      FilterProducts,
+      category,
+      price,
+      isLogIn,
+      isAddProduct,
+      isConfirmsDelete,
+      deletedProductId,
+      productDetails,
+      isEditProduct,
+      inputsValues,
+    } = this.state;
     return (
-      <div className="App">
-        <Header handelSearch={this.handelSearch} handelChange={this.handelChange} price={price} />
+      <div className='App'>
+        <Header
+          handelSearch={this.handelSearch}
+          handelChange={this.handelChange}
+          price={price}
+        />
 
         <Routes>
           <Route
-            path="/"
+            path='/'
             element={
               <>
                 <ToastContainer />
@@ -121,49 +181,58 @@ class App extends Component {
                       ? FilterProducts.filter((ele) =>
                           category === 'All'
                             ? ele.price >= +price
-                            : ele.price >= +price && ele.category === category
+                            : ele.price >= +price && ele.category === category,
                         )
                       : products.filter((ele) =>
                           category === 'All'
                             ? ele.price >= +price
-                            : ele.price >= +price && ele.category === category
+                            : ele.price >= +price && ele.category === category,
                         )
                   }
-                  
                 />
               </>
             }
           />
 
-          <Route path="/cart" element={<Cart handelDeleteFromCart={this.handelDeleteFromCart}/>} />
           <Route
-            path="/seller"
+            path='/cart'
+            element={<Cart handelDeleteFromCart={this.handelDeleteFromCart} />}
+          />
+          <Route
+            path='/seller'
             element={
               <Seller
-              deletedProductValue={deletedProductId}
-              deletedProductId={this.setStateProductId}
+                deletedProductValue={deletedProductId}
+                deletedProductId={this.setStateProductId}
                 checkState={isConfirmsDelete}
                 handleOnClick={this.handConfirmDeleting}
                 products={products}
                 isAddProduct={isAddProduct}
+                isEditProduct={isEditProduct}
                 handleAddProductPop={this.handleAddProductPop}
+                handleEditProductPop={this.handleEditProductPop}
+                handleEditSubmit={this.handleEditSubmit}
+                inputsValues={inputsValues}
+                handleInputChange={this.handleInputChange}
                 handelChange={this.handelChange}
+                updateState={this.updateState}
               />
             }
           />
           <Route
-            path="/product/:id"
+            path='/product/:id'
             element={
               <>
-              <ToastContainer />
-              <ProductDetails
-                handleChangeId={this.handleChangeId}
-                handleProductDetails={this.handleProductDetails}
-                productDetails={productDetails}
-              /></>
+                <ToastContainer />
+                <ProductDetails
+                  handleChangeId={this.handleChangeId}
+                  handleProductDetails={this.handleProductDetails}
+                  productDetails={productDetails}
+                />
+              </>
             }
           />
-          <Route path="*" element={<h1>not found</h1>} />
+          <Route path='*' element={<h1>not found</h1>} />
         </Routes>
       </div>
     );
@@ -171,14 +240,3 @@ class App extends Component {
 }
 
 export default App;
-
-// todo add component did mount to get products => abdullha
-// todo get productsDetails based on id => abdullah
-
-// todo add to cart in localstorage => mayar
-// todo remove from cart localstorage => mayar
-
-// todo add product to database with confrim msg => rand
-// todo delete product with confirm pop => rand
-
-// todo seller edit product with editform => amjad
