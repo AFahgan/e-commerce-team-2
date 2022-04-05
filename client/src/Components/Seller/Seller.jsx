@@ -4,7 +4,16 @@ import Products from '../Products/Products';
 import './Seller.css';
 import AddProductForm from '../AddProductForm/AddProductForm.jsx';
 
-const Seller = ({ products, handleAddProductPop, isAddProduct }) => {
+const Seller = ({
+  products,
+  handleAddProductPop,
+  isAddProduct,
+  isEditProduct,
+  handleEditProductPop,
+  handleEditSubmit,
+  inputsValues,
+  handleInputChange
+}) => {
   return (
     <>
       <Header />
@@ -13,7 +22,15 @@ const Seller = ({ products, handleAddProductPop, isAddProduct }) => {
 
         {isAddProduct && <AddProductForm handleAddProductPop={handleAddProductPop} />}
       </div>
-      <Products isSeller products={products} />
+      <Products
+        isSeller
+        products={products}
+        isEditProduct={isEditProduct}
+        handleEditProductPop={handleEditProductPop}
+        handleEditSubmit={handleEditSubmit}
+        inputsValues={inputsValues}
+        handleInputChange={handleInputChange}
+      />
     </>
   );
 };

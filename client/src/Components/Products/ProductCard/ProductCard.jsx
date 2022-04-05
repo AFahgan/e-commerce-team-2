@@ -1,8 +1,18 @@
 import './ProductCard.css';
 import Button from '../../Button/Button';
 import { useNavigate } from 'react-router-dom';
+import AddProductForm from '../../AddProductForm/AddProductForm';
 
-const ProductCard = ({ isSeller, isCart, product }) => {
+const ProductCard = ({
+  isSeller,
+  isCart,
+  product,
+  isEditProduct,
+  handleEditProductPop,
+  handleEditSubmit,
+  inputsValues,
+  handleInputChange,
+}) => {
   const { name, price, image, id } = product;
   const navigate = useNavigate();
 
@@ -27,10 +37,22 @@ const ProductCard = ({ isSeller, isCart, product }) => {
         <div className='info'>
           <span className='name'>{name}</span>
           <div className='actions'>
-            {!isCart ? <i className='fa-solid fa-pen-to-square'></i> : false}
+            {!isCart ? (
+              <i id={id} onClick={handleEditProductPop} className='fa-solid fa-pen-to-square'></i>
+            ) : (
+              false
+            )}
             <i className='fa-solid fa-trash-can'></i>
           </div>
         </div>
+      )}
+      {isEditProduct && (
+        <AddProductForm
+          handleSubmit={handleEditSubmit}
+          handleAddProductPop={handleEditProductPop}
+          inputsValues={inputsValues}
+          handleInputChange={handleInputChange}
+        />
       )}
     </li>
   );

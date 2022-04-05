@@ -17,6 +17,9 @@ class App extends Component {
     FilterProducts: [],
     isLogIn: false,
     isAddProduct: false,
+    isEditProduct: false,
+    inputsValues: { name: '', description: '', price: 0.0, image: '' },
+    editedProductId: null,
   };
 
   componentDidMount() {
@@ -36,6 +39,46 @@ class App extends Component {
       isAddProduct: !previousState.isAddProduct,
     }));
   };
+
+  handleEditProductPop = ({ target: { id } }) => {
+    const { name, description, image, category, price } =
+      this.state.products.find(({ id: pId }) => pId === +id) || [];
+
+    this.setState((previousState) => ({
+      isEditProduct: !previousState.isEditProduct,
+      inputsValues: { name, description, image, category, price },
+      editedProductId: id,
+    }));
+  };
+
+  handleInputChange = ({ target }) => {
+    this.setState(({ inputsValues }) => ({
+      inputsValues: { ...inputsValues, [target.name]: target.value },
+    }));
+  };
+
+  handleEditSubmit = (e) => {
+    e.preventDefault();
+
+    const id = this.state.editedProductId;
+    const inputsValues = this.state.inputsValues;
+
+    axios
+      .patch(`http://localhost:3001/api/v1/product/${id}`, inputsValues)
+      .then(() => {
+        this.setState((previousState) => ({ isEditProduct: !previousState.isEditProduct }));
+      })
+      .then(() =>
+        axios.get('http://localhost:3001/api/v1/product').then(({ data }) => {
+          this.setState({ products: data });
+        }),
+      );
+  };
+
+  handelChange = (name, value) => {
+    this.setState({ [name]: value });
+  };
+
   handelSearch = (e) => {
     const { products } = this.state;
     if (e.keyCode === 13) {
@@ -45,11 +88,18 @@ class App extends Component {
       });
     }
   };
-  handelChange = (name, value) => {
-    this.setState({ [name]: value });
-  };
   render() {
-    const { products, FilterProducts, category, price, isLogIn, isAddProduct } = this.state;
+    const {
+      products,
+      FilterProducts,
+      category,
+      price,
+      isLogIn,
+      isAddProduct,
+      isEditProduct,
+      inputsValues,
+    } = this.state;
+
     return (
       <div className='App'>
         <Header
@@ -66,7 +116,6 @@ class App extends Component {
                 <Landing checkState={isLogIn} handleOnClick={this.handleLogIn} />
                 <Products
                   products={
-                    // products
                     FilterProducts.length
                       ? FilterProducts.filter((ele) =>
                           category === 'All'
@@ -91,7 +140,12 @@ class App extends Component {
               <Seller
                 products={products}
                 isAddProduct={isAddProduct}
+                isEditProduct={isEditProduct}
                 handleAddProductPop={this.handleAddProductPop}
+                handleEditProductPop={this.handleEditProductPop}
+                handleEditSubmit={this.handleEditSubmit}
+                inputsValues={inputsValues}
+                handleInputChange={this.handleInputChange}
               />
             }
           />
