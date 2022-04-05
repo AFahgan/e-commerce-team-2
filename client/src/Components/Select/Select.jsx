@@ -7,11 +7,11 @@ const Select = ({ isAdd, handelChange }) => {
       onChange={(e) => handelChange(e.target.name, e.target.value)}
     >
       {!isAdd && <option value="All">All</option>}
-      <option value="Chair">Chair</option>
-      <option value="Sofa">Sofa</option>
-      <option value="Living Room">Living Room</option>
-      <option value="Kitchen">Kitchen</option>
-      <option value="Bed">Bed</option>
+      <option value="chair">chair</option>
+      <option value="sofa">sofa</option>
+      <option value="living room">living room</option>
+      <option value="kitchen">kitchen</option>
+      <option value="bed">bed</option>
     </select>
   );
 };

@@ -15,7 +15,7 @@ class App extends Component {
     products: [],
     category: 'All',
     price: 100,
-    proudectName: '',
+    productName: '',
     FilterProducts: [],
     isLogIn: false,
     isAddProduct: false,
@@ -59,12 +59,15 @@ class App extends Component {
 
   handelSearch = (e) => {
     const { products } = this.state;
+    this.setState({productName :e.target.value })
     if (e.keyCode === 13) {
       e.target.click();
       this.setState({
         FilterProducts: products.filter((ele) => ele.name.includes(e.target.value)),
       });
     }
+
+
   };
   
   handelChange = (name, value) => {
@@ -102,7 +105,7 @@ class App extends Component {
   };
 
   render() {
-    const { products, FilterProducts, category, price, isLogIn, isAddProduct,isConfirmsDelete, deletedProductId, productDetails } = this.state;
+    const { productName ,products, FilterProducts, category, price, isLogIn, isAddProduct,isConfirmsDelete, deletedProductId, productDetails } = this.state;
     return (
       <div className="App">
         <Header handelSearch={this.handelSearch} handelChange={this.handelChange} price={price} />
@@ -135,7 +138,7 @@ class App extends Component {
             }
           />
 
-          <Route path="/cart" element={<Cart handelDeleteFromCart={this.handelDeleteFromCart}/>} />
+          <Route path="/cart" element={<Cart handelSearch={this.handelSearch}productName={productName} handelChange={this.handelChange} handelDeleteFromCart={this.handelDeleteFromCart }price={price} category={category}/>} />
           <Route
             path="/seller"
             element={
