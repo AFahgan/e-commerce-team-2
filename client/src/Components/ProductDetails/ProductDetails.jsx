@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams } from "react-router-dom";
 import './ProductDetails.css';
 
-const ProductDetails = ({ handleProductDetails, productDetails }) => {
+const ProductDetails = ({ handleProductDetails, productDetails , handleChangeId }) => {
   let { id } = useParams();
   const { name, description, image, price } = productDetails;
   axios.get(`http://localhost:3001/api/v1/product/${id}`)
@@ -22,7 +22,7 @@ const ProductDetails = ({ handleProductDetails, productDetails }) => {
         <p className="description">
           {description}
         </p>
-        <Button id={id} text="Add To Cart" />
+        <Button id={id} text="Add To Cart" handleOnClick={()=>handleChangeId(id)}/>
       </div>
       <div className="rightContainer">
         <img
