@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-const ProductCard = ({ isSeller, isCart, product, checkState, handleChangeId, handleOnClick, deletedProductId, deletedProductValue }) => {
+const ProductCard = ({ handelDeleteFromCart , isSeller, isCart, product, checkState, handleChangeId, handleOnClick, deletedProductId, deletedProductValue }) => {
 
   const { name, price, image, id } = product;
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ const ProductCard = ({ isSeller, isCart, product, checkState, handleChangeId, ha
         {!isSeller && !isCart && (
           <i
             className="fa-solid fa-cart-plus"
-            onClick={(e)=> handleChangeId(e.target.parentNode.parentNode.id)}
+            onClick={(e) => handleChangeId(e.target.parentNode.parentNode.id)}
           />
         )}
 
@@ -45,14 +45,16 @@ const ProductCard = ({ isSeller, isCart, product, checkState, handleChangeId, ha
           <Button text="More" handleOnClick={() => navigate(`/product/${id}`)} />
         </div>
       ) : (
+        
+
         <div className='info'>
           <span className='name'>{name}</span>
           <div className='actions'>
             {!isCart ? (<>
             <i className='fa-solid fa-pen-to-square'></i>
             <i className='fa-solid fa-trash-can'  onClick={() => { handleOnClick(); deletedProductId(id)}}></i>
-           {checkState? <ConfirmedDeleting handleOnClick={handleOnClick} handelDelete={() => {deleteFromDataBase(); handleOnClick();}}/>: null }
-            </>) : <i className='fa-solid fa-trash-can' ></i>}
+            {checkState? <ConfirmedDeleting handleOnClick={handleOnClick} handelDelete={() => {deleteFromDataBase(); handleOnClick();}}/>: null }
+            </>) : <i className='fa-solid fa-trash-can' onClick={()=> handelDeleteFromCart(id)} ></i>}
           </div>
         </div>
       )}

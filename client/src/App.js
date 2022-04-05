@@ -22,6 +22,8 @@ class App extends Component {
     isConfirmsDelete: false,
     deletedProductId:'',
     productDetails: { id: '', name: '', description: '', image: '', price: '' },
+    productsCart : [],
+    
   };
 
   componentDidMount() {
@@ -44,7 +46,7 @@ class App extends Component {
   };
 
   handConfirmDeleting = () => {
-     this.setState((previousState) => ({
+    this.setState((previousState) => ({
       isConfirmsDelete: !previousState.isConfirmsDelete,
     }));
   };
@@ -86,10 +88,21 @@ class App extends Component {
     );
     toast.success('Your Product has been added in Cart Successfully!');
   };
+  handelDeleteFromCart = (id) => {
+    let products =JSON.parse(window.localStorage.products)
+    this.setState({productsCart : JSON.parse(window.localStorage.products) })
+    for( let i = 0 ; i <= products.length ; i++){
+      if(products[i].id === id){
+        products[i] = []
+          break;
+      }
+    }
+    window.localStorage.clear();
+    window.localStorage.setItem('products',JSON.stringify(products.filter(e => e.length !== 0)));
+  };
 
   render() {
     const { products, FilterProducts, category, price, isLogIn, isAddProduct,isConfirmsDelete, deletedProductId, productDetails } = this.state;
-
     return (
       <div className="App">
         <Header handelSearch={this.handelSearch} handelChange={this.handelChange} price={price} />
@@ -116,12 +129,13 @@ class App extends Component {
                             : ele.price >= +price && ele.category === category
                         )
                   }
+                  
                 />
               </>
             }
           />
 
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/cart" element={<Cart handelDeleteFromCart={this.handelDeleteFromCart}/>} />
           <Route
             path="/seller"
             element={
