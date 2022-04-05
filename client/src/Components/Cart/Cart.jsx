@@ -4,7 +4,6 @@ import './Cart.css';
 
 const Cart = ({handelDeleteFromCart, handelSearch , price , category ,productName , handelChange}) => {
   const products = JSON.parse(localStorage.getItem('products')) || []
-  console.log(category)
   const totalPrice = products.reduce((acc, { price }) => acc + +price, 0).toFixed(2);
 
   return (
