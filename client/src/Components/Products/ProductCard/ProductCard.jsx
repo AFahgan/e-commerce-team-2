@@ -1,13 +1,29 @@
 import './ProductCard.css';
 import Button from '../../Button/Button';
 import { useNavigate } from 'react-router-dom';
+import ConfirmedDeleting from '../../ConfirmedDeleting/ConfirmedDeleting';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const ProductCard = ({ isSeller, isCart, product, handleChangeId, handelDeleteFromCart }) => {
+
+const ProductCard = ({ handelDeleteFromCart , isSeller, isCart, product, checkState, handleChangeId, handleOnClick, deletedProductId, deletedProductValue }) => {
+
   const { name, price, image, id } = product;
   const navigate = useNavigate();
-  // console.log(handelDeleteFromCart);
+
+  const deleteFromDataBase = (e) => {
+    axios.delete(`http://localhost:3001/api/v1/product/${deletedProductValue}`, {
+      data: {
+        id: deletedProductValue
+      }
+    }).then(() => {
+      toast.success('Your Product has been deleted Successfully!');
+    });
+  }
   return (
     <li className="card" id={id}>
+    <ToastContainer />
       <div className="card-main">
         {!isSeller && !isCart && (
           <i
@@ -29,16 +45,16 @@ const ProductCard = ({ isSeller, isCart, product, handleChangeId, handelDeleteFr
           <Button text="More" handleOnClick={() => navigate(`/product/${id}`)} />
         </div>
       ) : (
-        <div className="info">
-          <span className="name">{name}</span>
-          <div className="actions">
-            {!isCart ? <i className="fa-solid fa-pen-to-square"></i> : false}
-            {!isCart ? (
-              <i className="fa-solid fa-trash-can"></i>
-            ) : (
-              <i className="fa-solid fa-trash-can" onClick={()=> handelDeleteFromCart(id)}></i>
-            )}
+        
 
+        <div className='info'>
+          <span className='name'>{name}</span>
+          <div className='actions'>
+            {!isCart ? (<>
+            <i className='fa-solid fa-pen-to-square'></i>
+            <i className='fa-solid fa-trash-can'  onClick={() => { handleOnClick(); deletedProductId(id)}}></i>
+            {checkState? <ConfirmedDeleting handleOnClick={handleOnClick} handelDelete={() => {deleteFromDataBase(); handleOnClick();}}/>: null }
+            </>) : <i className='fa-solid fa-trash-can' onClick={()=> handelDeleteFromCart(id)} ></i>}
           </div>
         </div>
       )}

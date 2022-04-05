@@ -4,7 +4,7 @@ import Products from '../Products/Products';
 import './Seller.css';
 import AddProductForm from '../AddProductForm/AddProductForm.jsx';
 
-const Seller = ({ products, handleAddProductPop, isAddProduct, handelChange }) => {
+const Seller = ({ products, handleAddProductPop, isAddProduct, handelChange, checkState, handleOnClick, deletedProductId, deletedProductValue }) => {
   return (
     <>
       <Header />
@@ -13,7 +13,7 @@ const Seller = ({ products, handleAddProductPop, isAddProduct, handelChange }) =
 
         {isAddProduct && <AddProductForm handleAddProductPop={handleAddProductPop} handelChange={handelChange} />}
       </div>
-      <Products isSeller products={products} />
+      <Products isSeller products={products} checkState={checkState} handleOnClick={handleOnClick} deletedProductId={deletedProductId} deletedProductValue={deletedProductValue}/>
     </>
   );
 };

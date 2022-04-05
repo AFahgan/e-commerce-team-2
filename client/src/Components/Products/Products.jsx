@@ -1,12 +1,11 @@
 import ProductCard from './ProductCard/ProductCard';
 import './Products.css';
 
-const Products = ({ isSeller, isCart, products , handleChangeId ,  handelDeleteFromCart}) => {
-  console.log(handelDeleteFromCart);
+const Products = ({ isSeller, isCart, products , handleChangeId, handelDeleteFromCart , handleOnClick, checkState, deletedProductId, deletedProductValue }) => {
   return (
     <ul className='grid' id='products'>
       {products.map((product) => (
-        <ProductCard handelDeleteFromCart={handelDeleteFromCart} handleChangeId={handleChangeId} key={product.id} isSeller={isSeller} isCart={isCart} product={product} />
+        <ProductCard handleChangeId={handleChangeId} handelDeleteFromCart={handelDeleteFromCart} key={product.id} isSeller={isSeller} isCart={isCart} product={product} handleOnClick={handleOnClick} checkState={checkState} deletedProductId={deletedProductId} deletedProductValue={deletedProductValue}/>
       ))}
     </ul>
   );

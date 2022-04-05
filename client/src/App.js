@@ -19,18 +19,35 @@ class App extends Component {
     FilterProducts: [],
     isLogIn: false,
     isAddProduct: false,
+    isConfirmsDelete: false,
+    deletedProductId:'',
     productDetails: { id: '', name: '', description: '', image: '', price: '' },
     productsCart : [],
     
   };
+
   componentDidMount() {
     axios.get('http://localhost:3001/api/v1/product').then(({ data }) => {
       this.setState({ products: data });
     });
-  }
+  };
+
+  setStateProductId = (id) => {
+    this.setState(() => ({
+      deletedProductId: id,
+    }));
+  };
+
+
   handleLogIn = () => {
     this.setState((previousState) => ({
       isLogIn: !previousState.isLogIn,
+    }));
+  };
+
+  handConfirmDeleting = () => {
+    this.setState((previousState) => ({
+      isConfirmsDelete: !previousState.isConfirmsDelete,
     }));
   };
 
@@ -39,6 +56,7 @@ class App extends Component {
       isAddProduct: !previousState.isAddProduct,
     }));
   };
+
   handelSearch = (e) => {
     const { products } = this.state;
     if (e.keyCode === 13) {
@@ -48,6 +66,7 @@ class App extends Component {
       });
     }
   };
+  
   handelChange = (name, value) => {
     this.setState({ [name]: value });
   };
@@ -74,18 +93,16 @@ class App extends Component {
     this.setState({productsCart : JSON.parse(window.localStorage.products) })
     for( let i = 0 ; i <= products.length ; i++){
       if(products[i].id === id){
-          products.pop(products[i])
+        products[i] = []
           break;
       }
     }
     window.localStorage.clear();
-    window.localStorage.setItem('products',JSON.stringify(products));
+    window.localStorage.setItem('products',JSON.stringify(products.filter(e => e.length !== 0)));
   };
 
   render() {
-    console.log(this.handelDeleteFromCart , 'test')
-    const { products, FilterProducts, category, price, isLogIn, isAddProduct, productDetails } =
-      this.state;
+    const { products, FilterProducts, category, price, isLogIn, isAddProduct,isConfirmsDelete, deletedProductId, productDetails } = this.state;
     return (
       <div className="App">
         <Header handelSearch={this.handelSearch} handelChange={this.handelChange} price={price} />
@@ -123,6 +140,10 @@ class App extends Component {
             path="/seller"
             element={
               <Seller
+              deletedProductValue={deletedProductId}
+              deletedProductId={this.setStateProductId}
+                checkState={isConfirmsDelete}
+                handleOnClick={this.handConfirmDeleting}
                 products={products}
                 isAddProduct={isAddProduct}
                 handleAddProductPop={this.handleAddProductPop}
