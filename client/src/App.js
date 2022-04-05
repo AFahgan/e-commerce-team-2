@@ -17,21 +17,31 @@ class App extends Component {
     FilterProducts: [],
     isLogIn: false,
     isAddProduct: false,
-    
+    isConfirmsDelete: false,
+    deletedProductId:''
   };
 
   componentDidMount() {
     axios.get('http://localhost:3001/api/v1/product').then(({ data }) => {
       this.setState({ products: data });
     });
-  }
+  };
+  setStateProductId = (id) => {
+    this.setState(() => ({
+      deletedProductId: id,
+    }));
+  };
 
   handleLogIn = () => {
     this.setState((previousState) => ({
       isLogIn: !previousState.isLogIn,
     }));
   };
-
+  handConfirmDeleting = () => {
+     this.setState((previousState) => ({
+      isConfirmsDelete: !previousState.isConfirmsDelete,
+    }));
+  };
   handleAddProductPop = () => {
     this.setState((previousState) => ({
       isAddProduct: !previousState.isAddProduct,
@@ -50,7 +60,7 @@ class App extends Component {
     this.setState({ [name]: value });
   };
   render() {
-    const { products, FilterProducts, category, price, isLogIn, isAddProduct } = this.state;
+    const { products, FilterProducts, category, price, isLogIn, isAddProduct,isConfirmsDelete, deletedProductId } = this.state;
     return (
       <div className='App'>
         <Header
@@ -67,7 +77,6 @@ class App extends Component {
                 <Landing checkState={isLogIn} handleOnClick={this.handleLogIn} />
                 <Products
                   products={
-                    // products
                     FilterProducts.length
                       ? FilterProducts.filter((ele) =>
                           category === 'All'
@@ -90,6 +99,10 @@ class App extends Component {
             path='/seller'
             element={
               <Seller
+              deletedProductValue={deletedProductId}
+              deletedProductId={this.setStateProductId}
+                checkState={isConfirmsDelete}
+                handleOnClick={this.handConfirmDeleting}
                 products={products}
                 isAddProduct={isAddProduct}
                 handleAddProductPop={this.handleAddProductPop}

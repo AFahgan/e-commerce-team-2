@@ -15,7 +15,6 @@ class AddProductForm extends Component {
     category: ''
   };
   handelChange = (name, value) => {
-
     this.setState({ [name]: value });
   };
   addProductToDataBase = () => {
@@ -32,7 +31,7 @@ class AddProductForm extends Component {
     }).catch((error) => {
       console.log(error);
       toast.error('Sorry make sure your input is correct');
-    })
+    });
   }
 render () {
   const {handleAddProductPop} =  this.props;
