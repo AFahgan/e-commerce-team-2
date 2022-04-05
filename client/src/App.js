@@ -8,6 +8,8 @@ import Cart from './Components/Cart/Cart.jsx';
 import Seller from './Components/Seller/Seller.jsx';
 import ProductDetails from './Components/ProductDetails/ProductDetails.jsx';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+
 class App extends Component {
   state = {
     products: [],
@@ -18,7 +20,8 @@ class App extends Component {
     isLogIn: false,
     isAddProduct: false,
     isConfirmsDelete: false,
-    deletedProductId:''
+    deletedProductId:'',
+    productDetails: { id: '', name: '', description: '', image: '', price: '' },
   };
 
   componentDidMount() {
@@ -26,27 +29,32 @@ class App extends Component {
       this.setState({ products: data });
     });
   };
+
   setStateProductId = (id) => {
     this.setState(() => ({
       deletedProductId: id,
     }));
   };
 
+
   handleLogIn = () => {
     this.setState((previousState) => ({
       isLogIn: !previousState.isLogIn,
     }));
   };
+
   handConfirmDeleting = () => {
      this.setState((previousState) => ({
       isConfirmsDelete: !previousState.isConfirmsDelete,
     }));
   };
+
   handleAddProductPop = () => {
     this.setState((previousState) => ({
       isAddProduct: !previousState.isAddProduct,
     }));
   };
+
   handelSearch = (e) => {
     const { products } = this.state;
     if (e.keyCode === 13) {
@@ -56,37 +64,56 @@ class App extends Component {
       });
     }
   };
+  
   handelChange = (name, value) => {
     this.setState({ [name]: value });
   };
+
+  handleProductDetails = ({ id, name, description, image, price }) => {
+    this.setState({
+      productDetails: { id, name, description, image, price },
+    });
+  };
+  handleChangeId = (Id) => {
+    const { products } = this.state;
+    window.localStorage.setItem(
+      'products',
+      JSON.stringify(
+        window.localStorage.products
+          ? [...JSON.parse(window.localStorage.products), ...products.filter((e) => e.id === +Id)]
+          : [...products.filter((e) => e.id === +Id)]
+      )
+    );
+    toast.success('Your Product has been added in Cart Successfully!');
+  };
+
   render() {
-    const { products, FilterProducts, category, price, isLogIn, isAddProduct,isConfirmsDelete, deletedProductId } = this.state;
+    const { products, FilterProducts, category, price, isLogIn, isAddProduct,isConfirmsDelete, deletedProductId, productDetails } = this.state;
+
     return (
-      <div className='App'>
-        <Header
-          handelSearch={this.handelSearch}
-          handelChange={this.handelChange}
-          price={price}
-        />
+      <div className="App">
+        <Header handelSearch={this.handelSearch} handelChange={this.handelChange} price={price} />
 
         <Routes>
           <Route
-            path='/'
+            path="/"
             element={
               <>
+                <ToastContainer />
                 <Landing checkState={isLogIn} handleOnClick={this.handleLogIn} />
                 <Products
+                  handleChangeId={this.handleChangeId}
                   products={
                     FilterProducts.length
                       ? FilterProducts.filter((ele) =>
                           category === 'All'
                             ? ele.price >= +price
-                            : ele.price >= +price && ele.category === category,
+                            : ele.price >= +price && ele.category === category
                         )
                       : products.filter((ele) =>
                           category === 'All'
                             ? ele.price >= +price
-                            : ele.price >= +price && ele.category === category,
+                            : ele.price >= +price && ele.category === category
                         )
                   }
                 />
@@ -94,9 +121,9 @@ class App extends Component {
             }
           />
 
-          <Route path='/cart' element={<Cart />} />
+          <Route path="/cart" element={<Cart />} />
           <Route
-            path='/seller'
+            path="/seller"
             element={
               <Seller
               deletedProductValue={deletedProductId}
@@ -110,8 +137,19 @@ class App extends Component {
               />
             }
           />
-          <Route path='/product/:id' element={<ProductDetails />} />
-          <Route path='*' element={<h1>not found</h1>} />
+          <Route
+            path="/product/:id"
+            element={
+              <>
+              <ToastContainer />
+              <ProductDetails
+                handleChangeId={this.handleChangeId}
+                handleProductDetails={this.handleProductDetails}
+                productDetails={productDetails}
+              /></>
+            }
+          />
+          <Route path="*" element={<h1>not found</h1>} />
         </Routes>
       </div>
     );

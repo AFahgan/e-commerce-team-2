@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-const ProductCard = ({ isSeller, isCart, product, checkState, handleOnClick, deletedProductId, deletedProductValue }) => {
+const ProductCard = ({ isSeller, isCart, product, checkState, handleChangeId, handleOnClick, deletedProductId, deletedProductValue }) => {
 
   const { name, price, image, id } = product;
   const navigate = useNavigate();
@@ -22,22 +22,27 @@ const ProductCard = ({ isSeller, isCart, product, checkState, handleOnClick, del
     });
   }
   return (
-    <li className='card' id={id}>
-      <ToastContainer />
-      <div className='card-main'>
-        {!isSeller && !isCart && <i className='fa-solid fa-cart-plus' />}
+    <li className="card" id={id}>
+    <ToastContainer />
+      <div className="card-main">
+        {!isSeller && !isCart && (
+          <i
+            className="fa-solid fa-cart-plus"
+            onClick={(e)=> handleChangeId(e.target.parentNode.parentNode.id)}
+          />
+        )}
 
-        <img src={image} alt='product' />
+        <img src={image} alt="product" />
       </div>
 
       {!isSeller && !isCart ? (
-        <div className='info'>
-          <div className='details'>
-            <span className='price'>{price}</span>
-            <span className='name'>{name}</span>
+        <div className="info">
+          <div className="details">
+            <span className="price">{price}</span>
+            <span className="name">{name}</span>
           </div>
 
-          <Button text='More' handleOnClick={() => navigate(`/product/${id}`)} />
+          <Button text="More" handleOnClick={() => navigate(`/product/${id}`)} />
         </div>
       ) : (
         <div className='info'>
