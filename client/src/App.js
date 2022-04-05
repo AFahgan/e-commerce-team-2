@@ -89,7 +89,7 @@ class App extends Component {
     axios
       .patch(`http://localhost:3001/api/v1/product/${id}`, inputsValues)
       .then(() =>
-        this.setState((previousState) => ({ isEditProduct: !previousState.isEditProduct }))
+        this.setState((previousState) => ({ isEditProduct: !previousState.isEditProduct })),
       )
       .then(this.updateState)
       .then(() => toast.success('Your Product has been edited Successfully!'));
@@ -122,9 +122,12 @@ class App extends Component {
       'products',
       JSON.stringify(
         window.localStorage.products
-          ? [...JSON.parse(window.localStorage.products), ...products.filter((e) => e.id === +Id)]
-          : [...products.filter((e) => e.id === +Id)]
-      )
+          ? [
+              ...JSON.parse(window.localStorage.products),
+              ...products.filter((e) => e.id === +Id),
+            ]
+          : [...products.filter((e) => e.id === +Id)],
+      ),
     );
     toast.success('Your Product has been added in Cart Successfully!');
   };
@@ -156,15 +159,17 @@ class App extends Component {
       isEditProduct,
       inputsValues,
     } = this.state;
-    console.log(category);
-
     return (
-      <div className="App">
-        <Header handelSearch={this.handelSearch} handelChange={this.handelChange} price={price} />
+      <div className='App'>
+        <Header
+          handelSearch={this.handelSearch}
+          handelChange={this.handelChange}
+          price={price}
+        />
 
         <Routes>
           <Route
-            path="/"
+            path='/'
             element={
               <>
                 <ToastContainer />
@@ -176,12 +181,12 @@ class App extends Component {
                       ? FilterProducts.filter((ele) =>
                           category === 'All'
                             ? ele.price >= +price
-                            : ele.price >= +price && ele.category === category
+                            : ele.price >= +price && ele.category === category,
                         )
                       : products.filter((ele) =>
                           category === 'All'
                             ? ele.price >= +price
-                            : ele.price >= +price && ele.category === category
+                            : ele.price >= +price && ele.category === category,
                         )
                   }
                 />
@@ -190,20 +195,18 @@ class App extends Component {
           />
 
           <Route
-            path="/cart"
-            element={
-              <Cart
-                handelSearch={this.handelSearch}
-                productName={productName}
-                handelChange={this.handelChange}
-                handelDeleteFromCart={this.handelDeleteFromCart}
-                price={price}
-                category={category}
-              />
-            }
+            path='/cart'
+            element={<Cart
+              handelSearch={this.handelSearch}
+              productName={productName}
+              handelChange={this.handelChange}
+              handelDeleteFromCart={this.handelDeleteFromCart}
+              price={price}
+              category={category}
+            />}
           />
           <Route
-            path="/seller"
+            path='/seller'
             element={
               <Seller
                 deletedProductValue={deletedProductId}
@@ -224,7 +227,7 @@ class App extends Component {
             }
           />
           <Route
-            path="/product/:id"
+            path='/product/:id'
             element={
               <>
                 <ToastContainer />
@@ -236,7 +239,7 @@ class App extends Component {
               </>
             }
           />
-          <Route path="*" element={<h1>not found</h1>} />
+          <Route path='*' element={<h1>not found</h1>} />
         </Routes>
       </div>
     );
