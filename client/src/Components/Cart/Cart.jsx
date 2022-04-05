@@ -4,8 +4,8 @@ import './Cart.css';
 
 const Cart = () => {
   const products = JSON.parse(localStorage.getItem('products')) || []
-
-  const totalPrice = products.reduce((acc, { price }) => acc + price, 0);
+  console.log(products);
+  const totalPrice = products.reduce((acc, { price }) => acc + +price, 0);
 
   return (
     <>
