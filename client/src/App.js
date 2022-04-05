@@ -20,6 +20,8 @@ class App extends Component {
     isLogIn: false,
     isAddProduct: false,
     productDetails: { id: '', name: '', description: '', image: '', price: '' },
+    productsCart : [],
+    
   };
   componentDidMount() {
     axios.get('http://localhost:3001/api/v1/product').then(({ data }) => {
@@ -67,8 +69,21 @@ class App extends Component {
     );
     toast.success('Your Product has been added in Cart Successfully!');
   };
+  handelDeleteFromCart = (id) => {
+    let products =JSON.parse(window.localStorage.products)
+    this.setState({productsCart : JSON.parse(window.localStorage.products) })
+    for( let i = 0 ; i <= products.length ; i++){
+      if(products[i].id === id){
+          products.pop(products[i])
+          break;
+      }
+    }
+    window.localStorage.clear();
+    window.localStorage.setItem('products',JSON.stringify(products));
+  };
 
   render() {
+    console.log(this.handelDeleteFromCart , 'test')
     const { products, FilterProducts, category, price, isLogIn, isAddProduct, productDetails } =
       this.state;
     return (
@@ -97,12 +112,13 @@ class App extends Component {
                             : ele.price >= +price && ele.category === category
                         )
                   }
+                  
                 />
               </>
             }
           />
 
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/cart" element={<Cart handelDeleteFromCart={this.handelDeleteFromCart}/>} />
           <Route
             path="/seller"
             element={
