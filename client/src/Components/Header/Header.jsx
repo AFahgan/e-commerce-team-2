@@ -27,6 +27,7 @@ function Header({ handelSearch, handelChange, price }) {
                 max='300'
                 step='5'
                 name='price'
+                value={price}
                 onChange={(e) => handelChange(e.target.name, e.target.value)}
               />
               <span>
