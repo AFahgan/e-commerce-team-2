@@ -23,8 +23,8 @@ function Header({ handelSearch, handelChange, price }) {
               <span>price</span>
               <input
                 type='range'
-                min='10'
-                max='300'
+                min='50'
+                max='2500'
                 step='5'
                 name='price'
                 value={price}

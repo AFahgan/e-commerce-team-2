@@ -108,7 +108,6 @@ class App extends Component {
 
   handelChange = (name, value) => {
     this.setState({ [name]: value });
-    console.log(name , value)
   };
 
   handleProductDetails = ({ id, name, description, image, price }) => {
