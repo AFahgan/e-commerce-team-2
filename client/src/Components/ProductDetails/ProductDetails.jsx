@@ -6,7 +6,7 @@ import './ProductDetails.css';
 const ProductDetails = ({ handleProductDetails, productDetails , handleChangeId }) => {
   let { id } = useParams();
   const { name, description, image, price } = productDetails;
-  axios.get(`http://localhost:3001/api/v1/product/${id}`)
+  axios.get(`/api/v1/product/${id}`)
       .then(res => {
         const { name, description, image, price} = res.data[0];
         handleProductDetails({ name, description, image, price })

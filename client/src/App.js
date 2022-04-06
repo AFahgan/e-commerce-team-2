@@ -30,13 +30,13 @@ class App extends Component {
   };
 
   componentDidMount() {
-    axios.get('http://localhost:3001/api/v1/product').then(({ data }) => {
+    axios.get('/api/v1/product').then(({ data }) => {
       this.setState({ products: data });
     });
   }
 
   updateState = () => {
-    axios.get('http://localhost:3001/api/v1/product').then(({ data }) => {
+    axios.get('/api/v1/product').then(({ data }) => {
       this.setState({ products: data });
     });
   };
@@ -88,7 +88,7 @@ class App extends Component {
     const inputsValues = this.state.inputsValues;
 
     axios
-      .patch(`http://localhost:3001/api/v1/product/${id}`, inputsValues)
+      .patch(`/api/v1/product/${id}`, inputsValues)
       .then(() =>
         this.setState((previousState) => ({ isEditProduct: !previousState.isEditProduct })),
       )

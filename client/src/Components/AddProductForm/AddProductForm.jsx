@@ -24,7 +24,7 @@ class AddProductForm extends Component {
       this.state;
     axios
       .post(
-        'http://localhost:3001/api/v1/product',
+        '/api/v1/product',
         {
           name: productName,
           description: productDescription,
