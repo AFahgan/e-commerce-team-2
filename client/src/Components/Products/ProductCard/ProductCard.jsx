@@ -40,7 +40,7 @@ const ProductCard = ({
       <div className='card-main'>
         {!isSeller && !isCart && (
           <i
-            className='fa-solid fa-cart-plus'
+            className='fa-solid fa-cart-shopping'
             onClick={(e) => handleChangeId(e.target.parentNode.parentNode.id)}
           />
         )}

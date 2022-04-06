@@ -1,4 +1,5 @@
 .form-input{
+  all: unset;
   width: 50%;
   height: 35px;
   margin: 10px 0px;

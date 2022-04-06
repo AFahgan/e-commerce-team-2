@@ -19,7 +19,7 @@ const Products = ({
   updateState
 }) => {
   return (
-    <ul className='grid' id='products'>
+    <ul className='flex' id='products'>
       {products.map((product) => (
         <ProductCard
           isEditProduct={isEditProduct}
