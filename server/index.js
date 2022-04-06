@@ -8,6 +8,7 @@ const getProducts = (category) => {
       `https://serpapi.com/search.json?engine=home_depot&q=${category}&api_key=f392cf3a53eed16538710342a1ad87a806076de514a4d99fb478bd9dd7f8777f`,
     )
     .then(({ data: { products } }) => {
+      // eslint-disable-next-line array-callback-return
       products.map((product) => {
         // ? exclude product's names that starts with a number
         if (!Number.isNaN(parseInt(product.title.slice(0, 1), 10))) {
