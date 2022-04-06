@@ -32,7 +32,7 @@ const getProducts = (category) => {
       });
     });
 };
-const categories = ['bed', 'living-room', 'kitchen', 'sofa', 'chair'];
+const categories = ['bed', 'living room', 'kitchen', 'sofa', 'chair'];
 
 // categories.forEach((category) => getProducts(category));
 
