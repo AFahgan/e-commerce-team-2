@@ -51,7 +51,7 @@ const ProductCard = ({
       {!isSeller && !isCart ? (
         <div className='info'>
           <div className='details'>
-            <span className='price'>{price}</span>
+            <span className='price'>${price}</span>
             <span className='name'>{name}</span>
           </div>
 
