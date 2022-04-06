@@ -1,6 +1,6 @@
 .modal {
   position: fixed; 
-  z-index: 1; 
+  z-index: 5; 
   padding-top: 100px; 
   left: 0;
   top: 0;
@@ -23,7 +23,7 @@ h2{
   margin: 0 auto;
   width: 50%;
   height: 65%;
-  background-color: #F4F2F3;
+  background-color: #fff;
   z-index: 10;
   border-radius: 15px;
   position: relative;
@@ -41,4 +41,7 @@ h2{
 }
 .container .btn{
   margin-bottom: 20px;
+}
+form input {
+  all: unset;
 }

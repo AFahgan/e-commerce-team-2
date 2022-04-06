@@ -16,7 +16,6 @@ class App extends Component {
     category: 'All',
     price: 10,
     productName: '',
-    FilterProducts: [],
     isLogIn: false,
     isAddProduct: false,
     isEditProduct: false,
@@ -96,14 +95,7 @@ class App extends Component {
   };
 
   handelSearch = (e) => {
-    const { products } = this.state;
     this.setState({ productName: e.target.value });
-    if (e.keyCode === 13) {
-      e.target.click();
-      this.setState({
-        FilterProducts: products.filter((ele) => ele.name.includes(e.target.value)),
-      });
-    }
   };
 
   handelChange = (name, value) => {
@@ -147,7 +139,6 @@ class App extends Component {
     const {
       productName,
       products,
-      FilterProducts,
       category,
       price,
       isLogIn,
@@ -176,17 +167,17 @@ class App extends Component {
                 <Products
                   handleChangeId={this.handleChangeId}
                   products={
-                    FilterProducts.length
-                      ? FilterProducts.filter((ele) =>
-                          category === 'All'
-                            ? ele.price >= +price
-                            : ele.price >= +price && ele.category === category,
-                        )
-                      : products.filter((ele) =>
-                          category === 'All'
-                            ? ele.price >= +price
-                            : ele.price >= +price && ele.category === category,
-                        )
+                    productName
+                    ? (
+                      category === 'All'
+                      ? products.filter((ele)=> ele.price >= +price && ele.name.includes(productName))
+                      : products.filter((ele)=> ele.price >= +price && ele.category === category && ele.name.includes(productName))
+                    )
+                    : (
+                      category === 'All'
+                      ? products.filter((ele) => ele.price >= +price)
+                      : products.filter((ele) => ele.price >= +price && ele.category === category) 
+                    )
                   }
                 />
               </>

@@ -3,10 +3,9 @@
   margin-top: 10rem;
 }
 .action .btn {
-  padding: 1rem 5rem;
+  padding: 5px 20px;
   transition: 0.3s;
-  font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 20px;
 }
 
 .action .btn:hover {
