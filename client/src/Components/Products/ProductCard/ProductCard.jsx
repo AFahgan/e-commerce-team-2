@@ -24,7 +24,7 @@ const ProductCard = ({
 
   const deleteFromDataBase = (e) => {
     axios
-      .delete(`http://localhost:3001/api/v1/product/${deletedProductValue}`, {
+      .delete(`/api/v1/product/${deletedProductValue}`, {
         data: {
           id: deletedProductValue,
         },
