@@ -20,6 +20,7 @@ const Products = ({
 }) => {
   return (
     <ul className='flex' id='products'>
+      {products.length? null : <h2 className='no-products-text'>No Products Found !!</h2>}
       {products.map((product) => (
         <ProductCard
           isEditProduct={isEditProduct}
