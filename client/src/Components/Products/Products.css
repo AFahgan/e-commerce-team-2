@@ -9,4 +9,6 @@ ul {
   justify-content: space-between;
 
 }
-
+.no-products-text{
+  margin: 10% auto;
+}

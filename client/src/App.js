@@ -9,6 +9,8 @@ import Seller from './Components/Seller/Seller.jsx';
 import ProductDetails from './Components/ProductDetails/ProductDetails.jsx';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import NotFoundPage from './Components/NotFound/NotFound';
+
 
 class App extends Component {
   state = {
@@ -233,7 +235,7 @@ class App extends Component {
               </>
             }
           />
-          <Route path='*' element={<h1>not found</h1>} />
+          <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </div>
     );
