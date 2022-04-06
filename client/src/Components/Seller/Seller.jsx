@@ -20,10 +20,14 @@ const Seller = ({
   deletedProductValue,
   handelChange,
   updateState,
+  price,
+  category,
+  handelSearch,
+  productName
 }) => {
   return (
     <>
-      <Header />
+      <Header handelChange={handelChange} price={price}  handelSearch={handelSearch}/>
       <div className='action'>
         <Button text='+ Add Product' handleOnClick={handleAddProductPop} />
 
@@ -47,7 +51,19 @@ const Seller = ({
       </div>
       <Products
         isSeller
-        products={products}
+        products={
+          productName
+          ? (
+            category === 'All'
+            ? products.filter((ele)=> ele.price >= +price && ele.name.includes(productName))
+            : products.filter((ele)=> ele.price >= +price && ele.category === category && ele.name.includes(productName))
+          )
+          : (
+            category === 'All'
+            ? products.filter((ele) => ele.price >= +price)
+            : products.filter((ele) => ele.price >= +price && ele.category === category) 
+          )
+        }
         isEditProduct={isEditProduct}
         handleEditProductPop={handleEditProductPop}
         handleEditSubmit={handleEditSubmit}

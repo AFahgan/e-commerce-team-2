@@ -86,7 +86,11 @@ const ProductCard = ({
             ) : (
               <i
                 className='fa-solid fa-trash-can'
-                onClick={() => handelDeleteFromCart(id)}></i>
+                onClick={() =>{
+                  handelDeleteFromCart(id)
+                  toast.success('Your Product has been deleted Successfully!')
+                }
+                }></i>
             )}
           </div>
         </div>
