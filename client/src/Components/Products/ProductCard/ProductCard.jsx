@@ -40,7 +40,7 @@ const ProductCard = ({
       <div className='card-main'>
         {!isSeller && !isCart && (
           <i
-            className='fa-solid fa-cart-plus'
+            className='fa-solid fa-cart-shopping'
             onClick={(e) => handleChangeId(e.target.parentNode.parentNode.id)}
           />
         )}
@@ -86,7 +86,11 @@ const ProductCard = ({
             ) : (
               <i
                 className='fa-solid fa-trash-can'
-                onClick={() => handelDeleteFromCart(id)}></i>
+                onClick={() =>{
+                  handelDeleteFromCart(id)
+                  toast.success('Your Product has been deleted Successfully!')
+                }
+                }></i>
             )}
           </div>
         </div>
