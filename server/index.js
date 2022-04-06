@@ -35,6 +35,6 @@ const getProducts = (category) => {
 };
 const categories = ['bed', 'living room', 'kitchen', 'sofa', 'chair'];
 
-// categories.forEach((category) => getProducts(category));
+categories.forEach((category) => getProducts(category));
 
 app.listen(app.get('port'), () => console.log(`http://localhost:${app.get('port')}`));
