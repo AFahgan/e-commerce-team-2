@@ -222,6 +222,10 @@ class App extends Component {
                 handleInputChange={this.handleInputChange}
                 handelChange={this.handelChange}
                 updateState={this.updateState}
+                price={price}
+                category={category}
+                handelSearch={this.handelSearch}
+                productName={productName}
               />
             }
           />
