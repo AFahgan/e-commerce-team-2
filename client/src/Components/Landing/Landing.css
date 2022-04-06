@@ -9,7 +9,6 @@
   margin-top: 130px;
 }
 .main-text{
-width: 45%;
 color: #292929;
 margin-bottom: 3%;
 }
@@ -20,4 +19,24 @@ margin-bottom: 3%;
 }
 .between-tow-component{
   width: 30px;
+}
+@media (max-width: 1000px) {
+.welcome-container{
+  flex-direction: column;
+  text-align: center;
+  font-size: 15px;
+  gap: 1.5rem;
+  line-height: 1.5rem;
+  padding-top: 2.5rem;
+}
+
+.welcome-container img {
+  width: 100%;
+}
+
+.website-description {
+  font-size: 1.3rem;
+  line-height: 1.3;
+  margin-top: 1rem;
+}
 }
