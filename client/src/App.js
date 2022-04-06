@@ -14,8 +14,8 @@ class App extends Component {
   state = {
     products: [],
     category: 'All',
-    price: 100,
-    proudectName: '',
+    price: 10,
+    productName: '',
     FilterProducts: [],
     isLogIn: false,
     isAddProduct: false,
@@ -97,6 +97,7 @@ class App extends Component {
 
   handelSearch = (e) => {
     const { products } = this.state;
+    this.setState({ productName: e.target.value });
     if (e.keyCode === 13) {
       e.target.click();
       this.setState({
@@ -107,6 +108,7 @@ class App extends Component {
 
   handelChange = (name, value) => {
     this.setState({ [name]: value });
+    console.log(name , value)
   };
 
   handleProductDetails = ({ id, name, description, image, price }) => {
@@ -139,14 +141,12 @@ class App extends Component {
       }
     }
     window.localStorage.clear();
-    window.localStorage.setItem(
-      'products',
-      JSON.stringify(products.filter((e) => e.length !== 0)),
-    );
+    window.localStorage.setItem('products', JSON.stringify(products.filter((e) => e.length !== 0)));
   };
-
+  
   render() {
     const {
+      productName,
       products,
       FilterProducts,
       category,
@@ -196,7 +196,14 @@ class App extends Component {
 
           <Route
             path='/cart'
-            element={<Cart handelDeleteFromCart={this.handelDeleteFromCart} />}
+            element={<Cart
+              handelSearch={this.handelSearch}
+              productName={productName}
+              handelChange={this.handelChange}
+              handelDeleteFromCart={this.handelDeleteFromCart}
+              price={price}
+              category={category}
+            />}
           />
           <Route
             path='/seller'
