@@ -6,7 +6,8 @@ CREATE TABLE products (
   description TEXT,
   image TEXT NOT NULL,
   category VARCHAR(50) NOT NULL,
-  price DECIMAL NOT NULL
+  price DECIMAL NOT NULL,
+  quantity INTEGER NOT NULL
 );
 
 COMMIT;

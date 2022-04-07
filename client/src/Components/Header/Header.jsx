@@ -31,12 +31,13 @@ function Header({ handelSearch, handelChange, price }) {
                 onChange={(e) => handelChange(e.target.name, e.target.value)}
               />
               <span>
-                {price}
                 <i className='fa-solid fa-dollar-sign'></i>
               </span>
             </div>
             <Select handelChange={handelChange} />
-            <i onClick={() => navigate('/cart')} className='fa-solid fa-cart-shopping'></i>
+            <i onClick={() => navigate('/cart')} className='fa-solid fa-cart-shopping'>
+             
+            </i>
           </div>
         </>
       )}
