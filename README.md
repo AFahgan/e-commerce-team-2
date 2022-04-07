@@ -11,10 +11,6 @@ The idea of changing in general is exhausting itself.
 So in our website we try to make it a comfortable step .
 we all know how annoying and hard it's to refurnish your home or maybe you're someone who's about to get married and your wife keeps  complaining and winning about getting  so this is idea of our website , in our website there are many options for furnisher ,so It got easier  
 
-
-
-
-
 ## User story :book:
 
 As a sellar you can add products
@@ -32,11 +28,6 @@ As a buyer you can search for any pruducts
 
 When you open our website, you will be faced landing page and products , if you a sellar you should login  by click login button to add, edit and delete any product , but if you a buyer you can add any products you want it to Cart and delete it and if you want read maor about any product you should clich on more button .
 enjoy  :full_moon_with_face:
-
-
-
-
-
 
 
 ## Clone It 🖨 
