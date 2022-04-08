@@ -20,15 +20,16 @@ const getProducts = (category) => {
         const { price } = product;
 
         connection.query(
-          `insert into products (name, description, image, category, price)
+          `insert into products (name, description, image, category, price,quantity)
         values (
             $1,
             $2,
             $3,
             $4,
-            $5
+            $5,
+            $6
           )`,
-          [productName, productDescription, imgUrl, category, price],
+          [productName, productDescription, imgUrl, category, price, 1],
         );
       });
     });

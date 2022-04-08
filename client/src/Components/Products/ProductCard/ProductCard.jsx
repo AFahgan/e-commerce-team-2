@@ -19,7 +19,7 @@ const ProductCard = ({
   deletedProductValue,
   updateState,
 }) => {
-  const { name, price, image, id } = product;
+  const { name, price, image, id,quantity } = product;
   const navigate = useNavigate();
 
   const deleteFromDataBase = (e) => {
@@ -36,7 +36,6 @@ const ProductCard = ({
   };
   return (
     <li className='card' id={id}>
-      <ToastContainer />
       <div className='card-main'>
         {!isSeller && !isCart && (
           <i
@@ -84,13 +83,17 @@ const ProductCard = ({
                 ) : null}
               </>
             ) : (
-              <i
-                className='fa-solid fa-trash-can'
-                onClick={() =>{
-                  handelDeleteFromCart(id)
-                  toast.success('Your Product has been deleted Successfully!')
-                }
-                }></i>
+              <>
+                <p>
+                  <span className='price'>${price}</span> X{quantity}
+                </p>
+                <i
+                  className='fa-solid fa-trash-can'
+                  onClick={() => {
+                    handelDeleteFromCart(id);
+                    toast.success('Your Product has been deleted Successfully!');
+                  }}></i>
+              </>
             )}
           </div>
         </div>

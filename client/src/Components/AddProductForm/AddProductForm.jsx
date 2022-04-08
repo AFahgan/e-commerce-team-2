@@ -46,7 +46,6 @@ class AddProductForm extends Component {
     const { handleAddProductPop } = this.props;
     return (
       <div className='modal'>
-        <ToastContainer />
         <div className='container'>
           <i className='fa-solid fa-xmark icon' onClick={handleAddProductPop}></i>
           <Input

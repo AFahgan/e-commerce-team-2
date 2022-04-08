@@ -2,6 +2,7 @@ import ProductCard from './ProductCard/ProductCard';
 import './Products.css';
 
 const Products = ({
+  quantity,
   isSeller,
   isCart,
   products,
@@ -16,13 +17,14 @@ const Products = ({
   checkState,
   deletedProductId,
   deletedProductValue,
-  updateState
+  updateState,
 }) => {
   return (
     <ul className='flex' id='products'>
-      {products.length? null : <h2 className='no-products-text'>No Products Found !!</h2>}
+      {products.length ? null : <h2 className='no-products-text'>No Products Found !!</h2>}
       {products.map((product) => (
         <ProductCard
+          quantity={quantity}
           isEditProduct={isEditProduct}
           handleEditProductPop={handleEditProductPop}
           handleEditSubmit={handleEditSubmit}
